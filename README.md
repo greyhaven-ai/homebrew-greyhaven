@@ -15,11 +15,12 @@ brew tap greyhaven-ai/greyhaven
 Comprehensive configuration manager for Claude Code.
 
 ```bash
-# Install
+# Install (one command, no tap needed!)
 brew install greyhaven-ai/greyhaven/claude-config
 
-# Or install directly
-brew install greyhaven-ai/greyhaven/claude-config
+# Or tap first then install
+brew tap greyhaven-ai/greyhaven
+brew install claude-config
 ```
 
 Features:

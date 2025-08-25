@@ -25,21 +25,31 @@ class ClaudeConfig < Formula
   end
 
   def caveats
-    <<~EOS
+    msg = <<~EOS
       Claude Config has been installed!
       
       Quick Start:
+        claude-config wizard              Interactive setup (recommended!)
         claude-config --help              Show all commands
         claude-config init                Initialize in current directory
         claude-config list-presets        Show available presets
-        claude-config preset recommended  Apply recommended preset
-      
-      To update from the repository:
-        claude-config update
       
       Documentation:
         https://github.com/greyhaven-ai/claude-code-config
     EOS
+    
+    # Check if npm version exists
+    npm_path = "#{HOMEBREW_PREFIX}/lib/node_modules/@greyhaven/claude-code-config"
+    if File.directory?(npm_path)
+      msg += <<~EOS
+        
+        ⚠️  Note: NPM version also detected at #{npm_path}
+        The Homebrew version will take precedence.
+        To use NPM version instead: brew uninstall claude-config
+      EOS
+    end
+    
+    msg
   end
 
   test do
