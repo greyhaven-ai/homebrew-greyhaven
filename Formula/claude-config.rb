@@ -1,8 +1,8 @@
 class ClaudeConfig < Formula
   desc "Comprehensive configuration manager for Claude Code"
   homepage "https://github.com/greyhaven-ai/claude-code-config"
-  url "https://github.com/greyhaven-ai/claude-code-config/archive/v1.0.1.tar.gz"
-  sha256 "2a021b7a7333248041beb41bf7a07f779da096be2dab3caffd0b5882ff23593a"
+  url "https://github.com/greyhaven-ai/claude-code-config/archive/v1.1.0.tar.gz"
+  sha256 "db3cc5f9110e577280a137a6dd18ce0ac45c67ed01b91d17856e7b43e6030e11"
   license "MIT"
   head "https://github.com/greyhaven-ai/claude-code-config.git", branch: "main"
 
