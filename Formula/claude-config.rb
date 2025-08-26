@@ -35,6 +35,18 @@ class ClaudeConfig < Formula
     chmod 0755, bin/"claude-config"
   end
 
+  def post_install
+    # Check if npm version exists and warn about potential conflict
+    npm_bin = "#{HOMEBREW_PREFIX}/bin/claude-config"
+    if File.exist?(npm_bin) && File.readlink(npm_bin).include?("node_modules")
+      opoo "Detected npm installation of claude-config at #{npm_bin}"
+      opoo "Homebrew installation will take precedence. To use npm version instead:"
+      opoo "  brew uninstall claude-config"
+      opoo "To use Homebrew version, you may need to run:"
+      opoo "  brew link --overwrite claude-config"
+    end
+  end
+
   def caveats
     msg = <<~EOS
       Claude Config has been installed!
@@ -49,14 +61,25 @@ class ClaudeConfig < Formula
         https://github.com/greyhaven-ai/claude-code-config
     EOS
     
-    # Check if npm version exists
+    # Check for npm version and provide resolution guidance
     npm_path = "#{HOMEBREW_PREFIX}/lib/node_modules/@greyhaven/claude-code-config"
+    npm_bin = "#{HOMEBREW_PREFIX}/bin/claude-config"
+    
     if File.directory?(npm_path)
       msg += <<~EOS
         
-        ⚠️  Note: NPM version also detected at #{npm_path}
-        The Homebrew version will take precedence.
-        To use NPM version instead: brew uninstall claude-config
+        ⚠️  Conflict Resolution:
+        Both npm and Homebrew versions detected!
+        
+        Option 1: Use Homebrew version (recommended)
+          brew link --overwrite claude-config
+        
+        Option 2: Use npm version
+          brew uninstall claude-config
+        
+        Option 3: Keep both, use explicit paths
+          Homebrew: #{opt_bin}/claude-config
+          npm: npx @greyhaven/claude-code-config
       EOS
     end
     
