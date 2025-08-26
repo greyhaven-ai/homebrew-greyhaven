@@ -1,16 +1,17 @@
 class ClaudeConfig < Formula
   desc "Comprehensive configuration manager for Claude Code"
   homepage "https://github.com/greyhaven-ai/claude-code-config"
-  url "https://github.com/greyhaven-ai/claude-code-config/archive/v1.1.0.tar.gz"
-  sha256 "db3cc5f9110e577280a137a6dd18ce0ac45c67ed01b91d17856e7b43e6030e11"
+  url "https://github.com/greyhaven-ai/claude-code-config/archive/v1.1.1.tar.gz"
+  sha256 "098828253fe3af6dfaffdd51df1c25c494f0e69a122d0a8af6f6aa45d668a3fc"
   license "MIT"
   head "https://github.com/greyhaven-ai/claude-code-config.git", branch: "main"
 
   depends_on "git"
 
   def install
-    # Install all files to libexec
+    # Install all files to libexec (including hidden directories)
     libexec.install Dir["*"]
+    libexec.install Dir[".claude"]
     
     # Create wrapper script that finds Python dynamically
     (bin/"claude-config").write <<~EOS
